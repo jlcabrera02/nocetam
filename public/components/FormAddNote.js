@@ -1,3 +1,4 @@
+import Input from "./Input.js";
 const FormAddNote = () => {
   const inputStyles = [
     "border",
@@ -7,82 +8,90 @@ const FormAddNote = () => {
     "px-1",
     "block",
     "shadow-md",
+    "sm:mx-2",
   ];
 
   return `
-  <form class="w-full">
-    <div id="row1" class="flex flex-col justify-center aling-center w-1/2 mx-auto">
+  <form id="addNote" class="w-full">
+    <div id="row1" class="flex flex-col justify-center aling-center w-max mx-auto sm:flex-row sm:wrap">
       <div>
         <p class="text-gray-500 text-center text-sm font-medium">Latitud</p>
-        ${Input({
-          className: inputStyles,
-          type: "number",
-          step: "any",
-          placeholder: "17.254136",
-          name: "latitud",
-        })}
+        ${
+          Input({
+            className: inputStyles,
+            type: "number",
+            step: "any",
+            placeholder: "17.254136",
+            name: "latitud",
+          }).outerHTML
+        }
       </div>
       <div>
         <p class="text-gray-500 text-center text-sm font-medium">Longitud</p>
-        ${Input({
-          className: inputStyles,
-          type: "number",
-          step: "any",
-          placeholder: "-91.254136",
-          name: "longitud",
-        })}
+        ${
+          Input({
+            className: inputStyles,
+            type: "number",
+            step: "any",
+            placeholder: "-91.254136",
+            name: "longitud",
+          }).outerHTML
+        }
       </div>
       <div>
-        <p class="text-gray-500 text-center text-sm font-medium">Elevación</p>
-        <div class="inline-flex items-center gap-2 w-full">
-        ${Input({
-          className: inputStyles,
-          type: "text",
-          placeholder: "12.6±13.10",
-          name: "elevacion",
-        })}
-          <button class="bg-red-500 rounded-lg w-20 h-10 text-white hover:bg-red-600" access="d">±</button>
+        <p class="text-gray-500 text-center text-sm font-medium">Elevación (m)</p>
+        <div class="inline-flex items-center gap-2 w-full relative">
+        ${
+          Input({
+            className: inputStyles,
+            type: "text",
+            placeholder: "12.6±13.10",
+            name: "elevacion",
+          }).outerHTML
+        }
+        <button id="mas-menos" class="bg-red-400 rounded-r-full w-10 h-full text-white absolute right-0 z-0 hover:bg-red-600 border border-red-500" accessKey="m">±</button>
         </div>
       </div>
     </div>
-    <div id="row2" class="flex flex-col justify-center aling-center w-1/2 mx-auto">
+    <div id="row2" class="flex flex-col justify-center aling-center w-max mx-auto sm:flex-row sm:wrap">
       <div>
-        <p class="text-gray-500 text-center text-sm font-medium">Presición</p>
-        <input class="border border-red-500 rounded-full mx-auto px-1 block shadow-md" type="number" step="any"
-          placeholder="1.6" name="precision">
+        <p class="text-gray-500 text-center text-sm font-medium">Presición (m)</p>
+        ${
+          Input({
+            className: inputStyles,
+            type: "number",
+            placeholder: "1.6",
+            step: "any",
+            name: "presicion",
+          }).outerHTML
+        }
       </div>
       <div>
         <p class="text-gray-500 text-center text-sm font-medium">Tiempo</p>
-        <input class="border border-red-500 rounded-full mx-auto px-1 block shadow-md" type="datetime-local"
-          name="tiempo">
+          ${
+            Input({
+              className: inputStyles,
+              type: "datetime-local",
+              name: "tiempo",
+            }).outerHTML
+          }
       </div>
+      </div>
+      <div id="row2" class="flex flex-col justify-center aling-center w-max mx-auto sm:flex-row sm:wrap">
       <div>
         <p class="text-gray-500 text-center text-sm font-medium">Nota</p>
-        <input class="border border-red-500 rounded-full mx-auto px-1 block shadow-md" type="text"
-          placeholder="Reunion mensual" name="nota">
+        ${
+          Input({
+            className: inputStyles,
+            type: "text",
+            placeholder: "Reunión mensual",
+            name: "nota",
+          }).outerHTML
+        }
       </div>
-    </div>
+      </div>
   </form>
   `;
 };
-
-function Input(obj) {
-  const input = document.createElement("input");
-  const { type, className, name, step = null, placeholder = null } = obj;
-
-  input.type = type;
-  input.classList.add(...className);
-  input.name = name;
-
-  if (placeholder) {
-    input.placeholder = placeholder;
-  }
-
-  if (step) {
-    input.step = step;
-  }
-
-  return input.outerHTML;
-}
 
 export default FormAddNote;
