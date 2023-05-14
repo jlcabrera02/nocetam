@@ -91,7 +91,7 @@ const app = (function () {
     contextNota.fillText(`Latitud: ${coor.latitud}`, 5, 60);
     contextNota.fillText(`Longitud: ${coor.longitud}`, 5, 120);
     contextNota.fillText(`Elevación: ${coor.altitud} m`, 5, 180);
-    contextNota.fillText(`Presición: ${coor.presicion} m`, 5, 240);
+    contextNota.fillText(`Precisión: ${coor.presicion} m`, 5, 240);
     contextNota.fillText(
       `Tiempo: ${zfill(day, 2)}-${zfill(month, 2)}-${zfill(year, 4)} ${zfill(
         hour,
